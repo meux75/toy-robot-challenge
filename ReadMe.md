@@ -59,6 +59,11 @@ Output: 3,3,NORTH
 
 # Solution
 
+## Prerequisites
+
+* C++14 or higher
+* Bazel
+
 ## Deliverables
 
 ### git
@@ -92,7 +97,6 @@ To run the application:
 ```
 bazel run //main:toy-robot
 ```
-
 
 To build the application:
 ```
