@@ -3,6 +3,7 @@
 
 #include "lib/common.h"
 #include "lib/command-parser.h"
+#include "lib/robot.h"
 
 using namespace ToyRobot;
 
@@ -91,4 +92,66 @@ TEST(CommandParserTest, InvalidCommand)
     } catch (...) {
         FAIL() << "Expected std::invalid_argument exception not thrown";
     }
+}
+TEST(RobotTest, PlaceAndReport)
+{
+    Robot robot;
+    robot.place(0, 0, Direction::NORTH);
+    testing::internal::CaptureStdout();
+    robot.report();
+    std::string output = testing::internal::GetCapturedStdout();
+    ASSERT_EQ(output, "Output: 0,0,NORTH\n");
+}
+
+TEST(RobotTest, InvalidPlacement)
+{
+    Robot robot;
+    EXPECT_ANY_THROW(robot.place(5, 5, Direction::NORTH));
+}
+
+TEST(RobotTest, Move)
+{
+    Robot robot;
+    robot.place(0, 0, Direction::NORTH);
+    robot.move();
+    testing::internal::CaptureStdout();
+    robot.report();
+    std::string output = testing::internal::GetCapturedStdout();
+    ASSERT_EQ(output, "Output: 0,1,NORTH\n");
+}
+
+TEST(RobotTest, TurnLeft)
+{
+    Robot robot;
+    robot.place(0, 0, Direction::NORTH);
+    robot.left();
+    testing::internal::CaptureStdout();
+    robot.report();
+    std::string output = testing::internal::GetCapturedStdout();
+    ASSERT_EQ(output, "Output: 0,0,WEST\n");
+}
+
+TEST(RobotTest, TurnRight)
+{
+    Robot robot;
+    robot.place(0, 0, Direction::NORTH);
+    robot.right();
+    testing::internal::CaptureStdout();
+    robot.report();
+    std::string output = testing::internal::GetCapturedStdout();
+    ASSERT_EQ(output, "Output: 0,0,EAST\n");
+}
+
+TEST(RobotTest, MultipleCommands)
+{
+    Robot robot;
+    robot.place(1, 2, Direction::EAST);
+    robot.move();
+    robot.move();
+    robot.left();
+    robot.move();
+    testing::internal::CaptureStdout();
+    robot.report();
+    std::string output = testing::internal::GetCapturedStdout();
+    ASSERT_EQ(output, "Output: 3,3,NORTH\n");
 }
