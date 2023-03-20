@@ -6,8 +6,9 @@ We use these submissions to help us understand your abilities and provide a disc
 
 Please complete the solution as a C++ project of your choice. 
 What to include in your submission 
-● Link to hosted VCS repository (preferred), or zip of source code 
-● Appropriate documentation such as a readme (it should be clear how to setup and run your C++ app) ● Appropriate unit and/or integration tests included with your source code (these should be runnable) 
+ - Link to hosted VCS repository (preferred), or zip of source code 
+ - Appropriate documentation such as a readme (it should be clear how to setup and run your C++ app)
+ - Appropriate unit and/or integration tests included with your source code (these should be runnable) 
 
 ## Description and requirements: 
 
@@ -54,3 +55,47 @@ LEFT
 MOVE 
 REPORT 
 Output: 3,3,NORTH
+
+
+# Solution
+
+## Deliverables
+
+### git
+
+Clone the repository from this location:
+
+* Github:
+  - https://github.com/meux75/toy-robot-challenge
+
+## Build
+
+This project uses Bazel as it's build system. Bazel can be used to build,run,test your C++ projects in a fast and reliable way. 
+Googletest is the testing framework that is used in this project and is very compatible with Bazel, it provides a wide range of testing capabilites.
+
+### Bazel & Googletest
+
+Here are the general steps to use Bazel and Googletest in a C++ project:
+
+* Install Bazel: You can download and install Bazel from the official Bazel website (https://bazel.build/). Make sure to install the version that is compatible with your operating system.
+* Create a Bazel workspace: A Bazel workspace is a directory that contains the source files for your project. A file called WORKSPACE is already provided.
+* Create a BUILD file: A BUILD file is used to specify the targets that you want to build in your project. A file called BUILD is already provided in the project directories.
+
+### Command line building and testing using Bazel
+
+To run google test: 
+```
+bazel test //test:robot-test
+```
+
+To run the application:
+```
+bazel run //main:toy-robot
+```
+
+
+To build the application:
+```
+bazel build //main:toy-robot
+```
+
